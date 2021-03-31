@@ -1,3 +1,10 @@
+# Custom
+cifar100coarse/
+data*/
+cifar_net*
+main_tutorial.py
+remap.py
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
