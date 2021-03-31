@@ -4,8 +4,6 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 from torchvision.datasets import CIFAR100
-from cifar100coarse.cifar100coarse import CIFAR100Coarse
-import pprint as pp
 
 from utils import *
 
@@ -14,7 +12,6 @@ class CIFAR100People(CIFAR100):
     def __init__(self, root, train=True, transform=None, target_transform=None, download=False):
         super(CIFAR100People, self).__init__(root, train, transform, target_transform, download)
 
-        # update labels
         coarse_labels = np.array(
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -22,7 +19,6 @@ class CIFAR100People(CIFAR100):
              0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0])
         self.targets = coarse_labels[self.targets]
 
-        # update classes
         self.classes = [
             ['beaver', 'dolphin', 'otter', 'seal', 'whale', 'aquarium_fish', 'flatfish', 'ray', 'shark', 'trout',
              'orchid', 'poppy', 'rose', 'sunflower', 'tulip', 'bottle', 'bowl', 'can', 'cup', 'plate', 'apple',
@@ -52,6 +48,6 @@ def get_data(download_enabled=False):
     testloader = torch.utils.data.DataLoader(testset, batch_size=4,
                                              shuffle=False, num_workers=0)
 
-    # classes = [label.decode() for label in unpickle('./data/cifar-100-python/meta')[b'coarse_label_names']]
     classes = ['not_person', 'person']
+
     return trainloader, testloader, classes

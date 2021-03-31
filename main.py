@@ -7,6 +7,7 @@ import os
 from config import *
 from dataset import get_data
 from models.net import Net
+from models.custom import Custom
 from train_net import train
 from test_net import test
 from utils import *
