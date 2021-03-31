@@ -1,7 +1,14 @@
 # pedestro-detecto
 Attempt at training a CNN for binary classification on the CIFAR100 dataset to detect people.
 
-Resources:
+## Current Results:
+```
+Accuracy of the network on the 10000 test images: 91 %
+Accuracy of not_person : 92 %
+Accuracy of person : 62 %
+```
+
+## Resources:
 
 https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 https://pytorch.org/vision/stable/datasets.html#cifar
