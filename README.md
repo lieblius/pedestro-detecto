@@ -1,11 +1,27 @@
 # pedestro-detecto
-Attempt at training a CNN for binary classification on the CIFAR100 dataset to detect people.
+CNN for binary image classification of pedestrians.
+
+## Model Architecture
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 100, 100]           2,432
+         MaxPool2d-2           [-1, 32, 25, 25]               0
+            Conv2d-3          [-1, 128, 13, 13]         102,528
+         MaxPool2d-4            [-1, 128, 3, 3]               0
+            Conv2d-5             [-1, 32, 2, 2]         102,432
+            Linear-6                   [-1, 16]           2,064
+            Linear-7                    [-1, 2]              34
+================================================================
+Total params: 209,490
+```
 
 ## Current Results:
 ```
-Accuracy of the network on the 10000 test images: 91 %
-Accuracy of not_person : 92 %
-Accuracy of person : 62 %
+Training Accuracy: 100%
+Validation Accuracy: 93.5%
+Test Accuracy: 73% on "testdata/Road with Person" and "testdata/Road without Person", 100% on "data"
 ```
 
 ## Resources:
