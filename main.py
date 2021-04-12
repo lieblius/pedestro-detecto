@@ -27,13 +27,13 @@ def main():
     # Test model on test set containing outside data not from the same dataset
     # Custom data layout:
     #  custom_data/
-    #      |
-    #      ----->not_pedestrian/
-    #     |             |
-    #    |              -------> *.jpg/png
-    #    ------>pedestrian/
-    #               |
-    #               -------> *.jpg/png
+    #     |
+    #     ----->not_pedestrian/
+    #     |           |
+    #     |           -----> *.jpg/png
+    #     ------>pedestrian/
+    #                |
+    #                ------> *.jpg/png
     test_custom_data(verbose=False, visualize=False, folder='custom_data')
 
 
