@@ -19,5 +19,6 @@ https://github.com/ryanchankh/cifar100coarse/
 https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py
 https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
 https://gist.github.com/adam-dziedzic/4322df7fc26a1e75bee3b355b10e30bc
+https://www.kaggle.com/tejasvdante/pedestrian-no-pedestrian
 
 Tested on Python 3.7.10
