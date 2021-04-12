@@ -1,1 +1,2 @@
-PATH = 'cifar_net.pth'
+PATH = 'models/trained/model.pth'
+OVERWRITE = False

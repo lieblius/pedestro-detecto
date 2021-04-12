@@ -1,8 +1,5 @@
 # Custom
-cifar100coarse/
-data*/
-cifar_net*
-main_tutorial.py
+*_data*/
 remap.py
 
 # Created by .ignore support plugin (hsz.mobi)
@@ -43,7 +40,7 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit validation / coverage reports
 htmlcov/
 .tox/
 .coverage

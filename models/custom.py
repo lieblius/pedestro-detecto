@@ -1,17 +1,18 @@
+from math import sqrt
+
 import torch.nn as nn
 import torch.nn.functional as F
-from math import sqrt
 
 
 class Custom(nn.Module):
     def __init__(self):
         super().__init__()
         self.conv1 = nn.Conv2d(3, 32, (5, 5), (2, 2), (2, 2))
-        self.pool = nn.MaxPool2d((2, 2), (2, 2))
+        self.pool = nn.MaxPool2d((4, 4), (4, 4))
         self.conv2 = nn.Conv2d(32, 128, (5, 5), (2, 2), (2, 2))
         self.conv3 = nn.Conv2d(128, 32, (5, 5), (2, 2), (2, 2))
-        self.fc_1 = nn.Linear(32, 4)
-        self.fc_2 = nn.Linear(4, 2)
+        self.fc_1 = nn.Linear(32*4, 16)
+        self.fc_2 = nn.Linear(16, 2)
         self.init_weights()
 
     def init_weights(self):

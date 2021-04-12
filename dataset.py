@@ -1,6 +1,3 @@
-import pickle
-import numpy as np
-import torch
 import torchvision
 import torchvision.transforms as transforms
 from torchvision.datasets import CIFAR100
@@ -9,6 +6,9 @@ from utils import *
 
 
 class CIFAR100People(CIFAR100):
+    """Unused in current implementation. Torchvision CIFAR100 class with labels consolidated down to binary person or
+    not_person """
+
     def __init__(self, root, train=True, transform=None, target_transform=None, download=False):
         super(CIFAR100People, self).__init__(root, train, transform, target_transform, download)
 
@@ -33,17 +33,18 @@ class CIFAR100People(CIFAR100):
             ['baby', 'boy', 'girl', 'man', 'woman']]
 
 
-def get_data(download_enabled=False):
+def get_cifar_data(download_enabled=False):
+    """Unused in current implementation. Loads CIFAR100People training and test data and classes"""
     transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-    trainset = CIFAR100People(root='./data', train=True,
+    trainset = CIFAR100People(root='./cifar_data', train=True,
                               download=download_enabled, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
                                               shuffle=True, num_workers=0)
 
-    testset = CIFAR100People(root='./data', train=False,
+    testset = CIFAR100People(root='./cifar_data', train=False,
                              download=download_enabled, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=4,
                                              shuffle=False, num_workers=0)
@@ -51,3 +52,21 @@ def get_data(download_enabled=False):
     classes = ['not_person', 'person']
 
     return trainloader, testloader, classes
+
+
+def get_custom_data(path):
+    """Loads custom data from path and standardizes to 200x200 normalized tensors"""
+    transform = transforms.Compose(
+        [transforms.Resize(200),
+         transforms.CenterCrop(200),
+         transforms.ToTensor(),
+         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+    trainset = torchvision.datasets.ImageFolder(f'{path}/train', transform=transform)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
+                                              shuffle=True, num_workers=0)
+    testset = torchvision.datasets.ImageFolder(f'{path}/validation', transform=transform)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=4,
+                                             shuffle=True, num_workers=0)
+
+    return trainloader, testloader

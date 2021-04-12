@@ -1,8 +1,14 @@
-import matplotlib.pyplot as plt
 import pickle
+
+import matplotlib.pyplot as plt
 import numpy as np
-import torchvision
 import torch
+from torchsummary import summary
+from tqdm import tqdm
+
+
+def viewmodel(net):
+    summary(net, (3, 200, 200))
 
 
 def unpickle(file):
@@ -12,27 +18,20 @@ def unpickle(file):
 
 
 def imshow(img):
-    img = img / 2 + 0.5  # unnormalize
-    npimg = img.numpy()
-    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.imshow(np.transpose((img / 2 + 0.5).numpy(), (1, 2, 0)))
     plt.show()
 
 
-def view_train_data(trainloader, classes):
-    dataiter = iter(trainloader)
-    images, labels = dataiter.next()
-    imshow(torchvision.utils.make_grid(images))
-    print(str([labels[j] for j in range(4)]))
-    print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
-
-
-def view_test_data(testloader, net, classes):
-    dataiter = iter(testloader)
-    images, labels = dataiter.next()
-    imshow(torchvision.utils.make_grid(images))
-    print('GroundTruth: ', ' '.join('%5s' % classes[labels[j]] for j in range(4)))
-    outputs = net(images)
-    _, predicted = torch.max(outputs, 1)
-    print('Predicted: ', ' '.join('%5s' % classes[predicted[j]]
-                                  for j in range(4)))
-
+def evaluate(model, loader, title=''):
+    device = torch.device('cpu')
+    model.eval()
+    correct = 0
+    with torch.no_grad():
+        for batch, label in tqdm(loader, bar_format=f'{title}' + '{l_bar}{bar:10}{r_bar}{bar:-10b}'):
+            batch = batch.to(device)
+            label = label.to(device)
+            pred = model(batch)
+            correct += (torch.argmax(pred, dim=1) == label).sum().item()
+        acc = correct / len(loader.dataset)
+        print("Evaluation accuracy: {}".format(acc))
+        return acc

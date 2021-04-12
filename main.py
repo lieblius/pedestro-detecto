@@ -1,28 +1,40 @@
-import pickle
-import torch
-import torchvision
-import numpy as np
 import os
 
-from config import *
-from dataset import get_data
-from models.net import Net
+from config import PATH, OVERWRITE
+from custom_dataset import test_custom_data
+from dataset import get_custom_data
 from models.custom import Custom
 from train_net import train
-from test_net import test
 from utils import *
 
 
 def main():
-    trainloader, testloader, classes = get_data(False)
+    # Load training and validation datas
+    trainloader, valloader = get_custom_data('data')
 
-    net = Net()
-    if not os.path.isfile(PATH):
-        train(trainloader, net)
+    # Initialize network and visualize
+    net = Custom()
+    viewmodel(net)
+
+    # If model is not already trained or to be overwritten then train, otherwise load and evaluate best epoch
+    if not os.path.isfile(PATH) or OVERWRITE:
+        train(trainloader, net, valloader, num_epochs=15)
     else:
         net.load_state_dict(torch.load(PATH))
+        evaluate(net, trainloader, 'Train Acc |')
+        evaluate(net, valloader, 'Val Acc |')
 
-    test(testloader, net, classes)
+    # Test model on test set containing outside data not from the same dataset
+    # Custom data layout:
+    #  custom_data/
+    #      |
+    #      ----->not_pedestrian/
+    #     |             |
+    #    |              -------> *.jpg/png
+    #    ------>pedestrian/
+    #               |
+    #               -------> *.jpg/png
+    test_custom_data(verbose=False, visualize=False, folder='custom_data')
 
 
 if __name__ == '__main__':
