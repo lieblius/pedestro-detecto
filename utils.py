@@ -8,21 +8,18 @@ from tqdm import tqdm
 
 
 def viewmodel(net):
+    """View model architecture"""
     summary(net, (3, 200, 200))
 
 
-def unpickle(file):
-    with open(file, 'rb') as fo:
-        res = pickle.load(fo, encoding='bytes')
-    return res
-
-
 def imshow(img):
+    """Convert transformed tensors back to images and view"""
     plt.imshow(np.transpose((img / 2 + 0.5).numpy(), (1, 2, 0)))
     plt.show()
 
 
 def evaluate(model, loader, title=''):
+    """Evaluate model accuracy"""
     device = torch.device('cpu')
     model.eval()
     correct = 0

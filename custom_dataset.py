@@ -10,8 +10,11 @@ from utils import *
 
 
 def test_custom_data(verbose=False, visualize=False, folder='custom_data'):
+    """Function capable of running standalone to evaluate model accuracy"""
     if visualize:
         verbose = True
+
+    # Standardize and load test data
     transform = transforms.Compose(
         [transforms.Resize(200),
          transforms.CenterCrop(200),
@@ -20,8 +23,12 @@ def test_custom_data(verbose=False, visualize=False, folder='custom_data'):
     testset = torchvision.datasets.ImageFolder(f'{folder}', transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=4,
                                              shuffle=False, num_workers=0)
+
+    # Initialize and load saved model
     net = Custom()
     net.load_state_dict(torch.load(PATH))
+
+    # If verbose mode is set, show model output for each image
     if verbose:
         predictions = []
         files = []
@@ -46,6 +53,8 @@ def test_custom_data(verbose=False, visualize=False, folder='custom_data'):
                 plt.title(predictions[i])
                 plt.show()
             i += 1
+
+    # Evaluate model accuracy on the test data
     evaluate(net, testloader, 'Test Acc |')
 
 
