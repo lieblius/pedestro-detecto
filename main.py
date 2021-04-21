@@ -34,7 +34,7 @@ def main():
     #     ------>pedestrian/
     #                |
     #                ------> *.jpg/png
-    test_custom_data(verbose=False, visualize=False, folder='custom_data')
+    test_custom_data(verbose=True, visualize=True, folder='custom_data')
 
 
 if __name__ == '__main__':
