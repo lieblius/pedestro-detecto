@@ -23,7 +23,7 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-Download the test data:
+If you do not have the test data, download the test data:
 
 ```
 git clone https://github.com/351Proj/testdata.git
