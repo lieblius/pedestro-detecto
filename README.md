@@ -14,7 +14,7 @@ python --version
 Clone the repository:
 
 ```
-git clone https://github.com/351Proj/pedestro-detecto.git
+git clone https://github.com/lieblius/pedestro-detecto.git
 ```
 
 Install requirements:
@@ -82,18 +82,8 @@ Total params: 209,490
 ```
 Training Accuracy: 100%
 Validation Accuracy: 93.5%
-Test Accuracy: 73% on "testdata/Road with Person" and "testdata/Road without Person", 100% on "data"
+Test Accuracy: 100% on "custom_data" (Only 12 or so photos)
 ```
 
-## Resources:
-
-https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
-https://pytorch.org/vision/stable/datasets.html#cifar
-https://www.cs.toronto.edu/~kriz/cifar.html
-https://github.com/bearpaw/pytorch-classification
-https://gist.github.com/beeva-albertorincon/1ef96e071ac5adcb421663f3bbe7b1a6
-https://github.com/ryanchankh/cifar100coarse/
-https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py
-https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
-https://gist.github.com/adam-dziedzic/4322df7fc26a1e75bee3b355b10e30bc
+## Dataset:
 https://www.kaggle.com/tejasvdante/pedestrian-no-pedestrian
